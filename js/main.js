@@ -1,40 +1,34 @@
-let cretElement = function(elName, className, textContant, id, src) {
-    const element = document.createElement(elName);
+const createElement = function(elName, className, textContent) {
+    const createdElement = document.createElement(elName);
+    createdElement.className = className;
 
-    if (className) {
-        element.className = className;
+    if (textContent) {
+        createdElement.textContent = textContent;
     }
 
-    if (id) {
-        element.id = id;
-    }
-
-    if (textContant) {
-        element.textContant = textContant
-    }
-
-    if (src) {
-        element.src = src;
-    }
-
-    return cretElement;
+    return createdElement
 }
-const productWrapper = document.querySelector(".wrapper");
-const productList = cretElement("ul", "product");
-productWrapper.append(productList);
 
-for (let i = 0; i <= products.length; i++) {
+
+const productWrapper = document.querySelector(".wrapper");
+const productList = createElement("ul", "product");
+
+
+for (let i = 0; i < products.length; i++) {
     const product = products[i];
 
-    const item = cretElement("li", "product__item", product.title, product.id);
+    const item = createElement("li", "product__item");
+
+    const productTitle = createElement("h2", "product__title", product.title);
+
 
     const productImg = document.createElement("img");
     productImg.src = product.img;
 
-
+    item.append(productTitle);
     item.append(productImg);
-
     productList.append(item);
 
 
 }
+productWrapper.append(productList);
