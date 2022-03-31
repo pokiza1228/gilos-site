@@ -11,8 +11,6 @@ const createElement = function(elName, className, textContent) {
 
 
 const productWrapper = document.querySelector(".wrapper");
-const productList = createElement("ul", "row list-unstyled g-3");
-
 
 for (let i = 0; i < products.length; i++) {
     const product = products[i];
@@ -47,14 +45,16 @@ for (let i = 0; i < products.length; i++) {
 
     //for (let j = 0; j < product.benefits.length; j++) 
 
-    productList.append(item);
+    productWrapper.append(item);
     item.append(wrapper);
     wrapper.append(productImg);
     wrapper.append(cardText);
     cardText.append(productTitle);
     cardText.append(productPrice);
     cardText.append(productPrice1);
+    cardText.append(productModel);
+    cardText.append(productDate);
+    cardText.append(benifitsList);
 
 
 }
-productWrapper.append(productList);
