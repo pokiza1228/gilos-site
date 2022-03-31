@@ -22,7 +22,7 @@ for (let i = 0; i < products.length; i++) {
 
     const wrapper = createElement("div", "card")
 
-    const productImg = createElement("img", "product__img");
+    const productImg = createElement("img", "card-img-top");
     productImg.src = product.img;
 
 
@@ -37,14 +37,23 @@ for (let i = 0; i < products.length; i++) {
     const productMark = createElement("mark", "", x);
     productPrice.append(productMark);
 
-    const productModel = createElement("p", "product__model", product.model);
+    const productPrice1 = createElement("p", "card-text", product.price);
 
-    item.append(productTitle);
-    item.append(productImg);
-    item.append(productPrice);
-    item.append(productModel);
+    const productModel = createElement("p", "badge bg-success", product.model);
+
+    const productDate = createElement("p", "card-text", product.addedDate);
+
+    const benifitsList = createElement("ul", "d-flex flex-wrap list-unstyled");
+
+    //for (let j = 0; j < product.benefits.length; j++) 
+
     productList.append(item);
-
+    item.append(wrapper);
+    wrapper.append(productImg);
+    wrapper.append(cardText);
+    cardText.append(productTitle);
+    cardText.append(productPrice);
+    cardText.append(productPrice1);
 
 
 }
