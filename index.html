@@ -17,9 +17,9 @@
             <h1 class="h2">Gilos.uz/smartphones</h1>
 
             <button class="btn btn-primary px-4" data-bs-toggle="modal" data-bs-target="#edit-student-modal">
-        <span class="me-2">Add product</span>
-        <i class="fa-solid fa-plus"></i>
-      </button>
+                <span class="me-2">Add product</span>
+                <i class="fa-solid fa-plus"></i>
+            </button>
         </div>
 
         <div class="row mt-5">
@@ -45,18 +45,18 @@
                     <div class="mb-3">
                         <label for="manufacturer" class="form-label">Manufacturer</label>
                         <select class="form-select" id="manufacturer">
-              <option value="0">All</option>
-              <!-- manufacturers array bu yerga kelishi kerak -->
-            </select>
+                            <option value="0">All</option>
+                            <!-- manufacturers array bu yerga kelishi kerak -->
+                        </select>
                     </div>
 
                     <div class="mb-3">
                         <label for="sortby" class="form-label">Sort by</label>
                         <select class="form-select" id="sortby">
-              <option value="1">Name</option>
-              <option value="2">Price: to lowest</option>
-              <option value="3">Price: to highest</option>
-            </select>
+                            <option value="1">Name</option>
+                            <option value="2">Price: to lowest</option>
+                            <option value="3">Price: to highest</option>
+                        </select>
                     </div>
 
                     <button class="btn btn-primary d-block w-100 py-2">Filter</button>
@@ -108,21 +108,21 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form class="form">
                         <div class="mb-3">
                             <label for="product-title" class="form-label">Title</label>
-                            <input type="text" class="form-control" id="product-title" placeholder="Falon telefon">
+                            <input type="text" class="form-control" id="product-title" required placeholder="Falon telefon">
                         </div>
                         <div class="mb-3">
                             <label for="price" class="form-label">Narxi</label>
-                            <input type="number" class="form-control" id="price" placeholder="12400000">
+                            <input type="number" class="form-control" id="price" required placeholder="12400000">
                         </div>
                         <div class="mb-3">
                             <label for="product-manufacturer" class="form-label">Manufacturer</label>
-                            <select class="form-select" id="product-manufacturer">
-                <option selected disabled value="0">Select a manufacturer</option>
-                <!-- manufacturers array bu yerga kelishi kerak -->
-              </select>
+                            <select class="form-select" id="product-manufacturer" required>
+                                <option selected disabled value="0">Select a manufacturer</option>
+                                <!-- manufacturers array bu yerga kelishi kerak -->
+                            </select>
                         </div>
 
                         <div class="mb-3">
@@ -133,7 +133,8 @@
                                 <li class="me-1 mb-1"><button type="button" class="btn btn-sm badge rounded-pill btn-danger">8gb</button></li>
                                 <li class="me-1 mb-1"><button type="button" class="btn btn-sm badge rounded-pill btn-danger">128gb</button></li>
                                 <li class="me-1 mb-1"><button type="button" class="btn btn-sm badge rounded-pill btn-danger">Waterproof</button></li>
-                                <li class="me-1 mb-1"><button type="button" class="btn btn-sm badge rounded-pill btn-danger">Falon yaxshi tarafi</button></li>
+                                <li class="me-1 mb-1"><button type="button" class="btn btn-sm badge rounded-pill btn-danger">Falon yaxshi tarafi</button>
+                                </li>
                             </ul>
                         </div>
                         <button type="submit" class="btn btn-primary d-block w-100 p-2">Add product</button>
@@ -147,7 +148,7 @@
 
 
 
-    <div class=" container"></div>
+    <script src="js/bootstrap.bundle.min.js"></script>
 
 
     <script src="js/data.js"></script>

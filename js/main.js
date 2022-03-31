@@ -10,6 +10,10 @@ const createElement = function(elName, className, textContent) {
 }
 
 
+
+
+
+
 const productWrapper = document.querySelector(".wrapper");
 
 for (let i = 0; i < products.length; i++) {
@@ -77,6 +81,12 @@ for (let i = 0; i < products.length; i++) {
     cardText.append(productDate);
     cardText.append(benifitsList);
     cardText.append(buttonDiv);
-
-
 }
+
+
+const form = document.querySelector(".form");
+form.addEventListener("sumbit", function(evt) {
+    evt.preventDefault();
+
+
+})
