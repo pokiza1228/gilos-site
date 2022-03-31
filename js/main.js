@@ -35,7 +35,9 @@ for (let i = 0; i < products.length; i++) {
     const productMark = createElement("mark", "", x);
     productPrice.append(productMark);
 
-    const productPrice1 = createElement("p", "card-text", product.price);
+    const productPrice1 = createElement("p", "card-text");
+    const productPrice2 = createElement("s", "", product.price);
+    productPrice1.append(productPrice2);
 
     const productModel = createElement("p", "badge bg-success", product.model);
 
