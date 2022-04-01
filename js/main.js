@@ -82,6 +82,13 @@ for (let k = 0; k < manufacturers.length; k++) {
     newSelect.append(opton);
 }
 
+const productWrapper = document.querySelector(".wrapper");
+
+for (let i = 0; i < products.length; i++) {
+    const product = products[i];
+    const newItem = cardRendr(product);
+    productWrapper.append(newItem);
+}
 
 const formF = document.querySelector("#form-body");
 formF.addEventListener("submit", function(evt) {
@@ -90,29 +97,28 @@ formF.addEventListener("submit", function(evt) {
     const newProductTitle = document.querySelector("#product-title");
     const newPrince = document.querySelector("#price");
     const newSelect = document.querySelector("#product-manufacturers");
+    const benef = document.querySelector("#benefits");
 
     const newProductTitleValue = newProductTitle.value;
     const newPrinceValue = Number(newPrince.value);
     const newSelectValue = newSelect.value;
+    const benefVaue = benef.value;
 
-    if (newProductTitleValue.trim() && newSelectValue && (newPrinceValue > 0)) {
+    if (newProductTitleValue.trim() && newSelectValue && (newPrinceValue > 0) && benefVaue) {
         const productss = {
             id: Math.floor(Math.random() * 1000),
             title: newProductTitleValue,
             img: "https://picsum.photos/300/200",
             price: newPrinceValue,
             model: newSelectValue,
-            addedDate: new Date().toISOString()
+            addedDate: new Date().toISOString(),
+            benefits: ["aaaaaa", "jjjj"]
         }
         products.push(productss);
         formF.reset();
+
+        const newItem = cardRendr(productss);
+        productWrapper.append(newItem);
     }
 
 });
-
-const productWrapper = document.querySelector(".wrapper");
-for (let i = 0; i < products.length; i++) {
-    const product = products[i];
-    const newItem = cardRendr(product);
-    productWrapper.append(newItem);
-}
