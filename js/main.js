@@ -83,26 +83,40 @@ for (let i = 0; i < products.length; i++) {
 }
 
 
+const selec = document.querySelector(".form-select");
+for (let k = 0; k < manufacturers.length; k++) {
+    const opton = createElement("option", "o", manufacturers[k].name);
+    opton.id = manufacturers[k].id;
 
+    selec.append(opton);
+}
 
-const form = document.querySelector(".form");
-form.addEventListener("sumbit", function(evt) {
+const newBenifits = document.querySelector(".new-benifits");
+const formF = document.querySelector("#form-body");
+formF.addEventListener("submit", function(evt) {
     evt.preventDefault();
 
-    const selec = document.querySelector(".form-select");
-    for (let k = 0; k < manufacturers.length; k++) {
-        const opton = createElement("option", "o", manufacturers[k].name);
-        opton.id = manufacturers[k].id;
+    const element = evt.target.elements;
 
-        selec.append(opton);
+    const newProductTitle = element.name;
+    const newPrince = element.price;
+    const newSelect = element.product;
+
+    const newProductTitleValue = newProductTitle.value;
+    const newPrinceValue = newPrince.value;
+    const newSelectValue = Number(newSelect.value);
+
+    if (newProductTitleValue.trim() && newSelectValue && (newPrinceValue > 0)) {
+        const productss = {
+            id: Math.random * 1000,
+            title: newProductTitleValue,
+            img: "https://picsum.photos/300/200",
+            price: newPrinceValue,
+            model: newSelectValue,
+            addedDate: new Date().toISOString(),
+        }
+        products.push(productss);
+
     }
-
-    const newProductTitle = document.querySelector(".new-title");
-    const newPrince = document.querySelector(".new-price");
-    const newSelect = document.querySelector(".new-select");
-
-    const newBenifits = document.querySelector(".new-benifits");
-
-
-
+    formF.reset();
 })
