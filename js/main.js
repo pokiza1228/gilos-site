@@ -91,32 +91,30 @@ for (let k = 0; k < manufacturers.length; k++) {
     selec.append(opton);
 }
 
-const newBenifits = document.querySelector(".new-benifits");
+
 const formF = document.querySelector("#form-body");
 formF.addEventListener("submit", function(evt) {
     evt.preventDefault();
 
-    const element = evt.target.elements;
-
-    const newProductTitle = element.name;
-    const newPrince = element.price;
-    const newSelect = element.product;
+    const newProductTitle = document.querySelector("#product-title");
+    const newPrince = document.querySelector("#price");
+    const newSelect = document.querySelector("#product-manufacturers");
 
     const newProductTitleValue = newProductTitle.value;
-    const newPrinceValue = newPrince.value;
-    const newSelectValue = Number(newSelect.value);
+    const newPrinceValue = Number(newPrince.value);
+    const newSelectValue = newSelect.value;
 
     if (newProductTitleValue.trim() && newSelectValue && (newPrinceValue > 0)) {
         const productss = {
-            id: Math.random * 1000,
+            id: Math.floor(Math.random() * 1000),
             title: newProductTitleValue,
             img: "https://picsum.photos/300/200",
             price: newPrinceValue,
             model: newSelectValue,
-            addedDate: new Date().toISOString(),
+            addedDate: new Date().toISOString()
         }
         products.push(productss);
-
+        formF.reset();
     }
-    formF.reset();
+
 })
