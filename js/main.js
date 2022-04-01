@@ -33,7 +33,7 @@ for (let i = 0; i < products.length; i++) {
 
     const productTitle = createElement("h3", "card-title", product.title);
 
-    const x = product.price / 4;
+    const x = 3 * product.price / 4;
 
     const productPrice = createElement("p", "card-text fw-bold");
     const productMark = createElement("mark", "", x);
@@ -55,7 +55,6 @@ for (let i = 0; i < products.length; i++) {
         const benifitsItem = createElement("li", "badge bg-primary me-1 mb-1", benifits);
 
         benifitsList.append(benifitsItem);
-
     }
 
     const buttonDiv = createElement("div", "position-absolute top-0 end-0 d-flex");
@@ -84,9 +83,26 @@ for (let i = 0; i < products.length; i++) {
 }
 
 
+
+
 const form = document.querySelector(".form");
 form.addEventListener("sumbit", function(evt) {
     evt.preventDefault();
+
+    const selec = document.querySelector(".form-select");
+    for (let k = 0; k < manufacturers.length; k++) {
+        const opton = createElement("option", "o", manufacturers[k].name);
+        opton.id = manufacturers[k].id;
+
+        selec.append(opton);
+    }
+
+    const newProductTitle = document.querySelector(".new-title");
+    const newPrince = document.querySelector(".new-price");
+    const newSelect = document.querySelector(".new-select");
+
+    const newBenifits = document.querySelector(".new-benifits");
+
 
 
 })
