@@ -76,7 +76,7 @@ const cardRendr = function(card) {
 
 const newSelect = document.querySelector("#product-manufacturers");
 for (let k = 0; k < manufacturers.length; k++) {
-    const opton = createElement("option", "o", manufacturers[k].name);
+    const opton = createElement("option", "", manufacturers[k].name);
     opton.id = manufacturers[k].id;
 
     newSelect.append(opton);
@@ -102,8 +102,9 @@ benef.addEventListener("input", function() {
     if (benefSplitet.length == 2) {
         benefArray.push(benefSplitet[0]);
 
-        benef.value = ""
+        benef.value = "";
         const benefWrapper = document.querySelector(".benifits-wrapper");
+        benefWrapper.textContent = "";
         for (let a = 0; a < benefArray.length; a++) {
             const benefItem = createElement("li", "me-1 mb-1");
             const benefBtn = createElement("button", "btn btn-sm badge rounded-pill btn-danger", benefArray[a]);
@@ -139,7 +140,8 @@ formF.addEventListener("submit", function(evt) {
         }
         products.push(productss);
         formF.reset();
-
+        const benefWrapper = document.querySelector(".benifits-wrapper");
+        benefWrapper.textContent = "";
         const newItem = cardRendr(productss);
         productWrapper.append(newItem);
     }
