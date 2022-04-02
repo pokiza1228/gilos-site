@@ -102,9 +102,23 @@ formF.addEventListener("submit", function(evt) {
     const newProductTitleValue = newProductTitle.value;
     const newPrinceValue = Number(newPrince.value);
     const newSelectValue = newSelect.value;
-    const benefVaue = benef.value;
 
-    if (newProductTitleValue.trim() && newSelectValue && (newPrinceValue > 0) && benefVaue) {
+
+
+
+    const benefArray = [];
+    benef.addEventListener("input", function() {
+
+        const benefVaue = benef.value;
+        const benefSplitet = benefVaue.split(";");
+        if (benefSplitet.length == 2) {
+            benefArray.push(benefSplitet[0]);
+            benefVaue = " ";
+            console.log("benefArray");
+        }
+    })
+
+    if (newProductTitleValue.trim() && newSelectValue && (newPrinceValue > 0) && benefArray) {
         const productss = {
             id: Math.floor(Math.random() * 1000),
             title: newProductTitleValue,
@@ -112,7 +126,7 @@ formF.addEventListener("submit", function(evt) {
             price: newPrinceValue,
             model: newSelectValue,
             addedDate: new Date().toISOString(),
-            benefits: ["aaaaaa", "jjjj"]
+            benefits: benefArray
         }
         products.push(productss);
         formF.reset();
