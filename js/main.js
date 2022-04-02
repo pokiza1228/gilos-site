@@ -102,7 +102,16 @@ benef.addEventListener("input", function() {
     if (benefSplitet.length == 2) {
         benefArray.push(benefSplitet[0]);
 
+        benef.value = ""
+        const benefWrapper = document.querySelector(".benifits-wrapper");
+        for (let a = 0; a < benefArray.length; a++) {
+            const benefItem = createElement("li", "me-1 mb-1");
+            const benefBtn = createElement("button", "btn btn-sm badge rounded-pill btn-danger", benefArray[a]);
+            benefWrapper.append(benefItem);
+            benefItem.append(benefBtn);
+        }
     }
+
 
 });
 
