@@ -90,6 +90,22 @@ for (let i = 0; i < products.length; i++) {
     productWrapper.append(newItem);
 }
 
+
+
+const benef = document.querySelector("#benefits");
+const benefArray = [];
+benef.addEventListener("input", function() {
+    const benefVaue = benef.value;
+
+    const benefSplitet = benefVaue.split(";");
+
+    if (benefSplitet.length == 2) {
+        benefArray.push(benefSplitet[0]);
+
+    }
+
+});
+
 const formF = document.querySelector("#form-body");
 formF.addEventListener("submit", function(evt) {
     evt.preventDefault();
@@ -97,26 +113,10 @@ formF.addEventListener("submit", function(evt) {
     const newProductTitle = document.querySelector("#product-title");
     const newPrince = document.querySelector("#price");
     const newSelect = document.querySelector("#product-manufacturers");
-    const benef = document.querySelector("#benefits");
 
     const newProductTitleValue = newProductTitle.value;
     const newPrinceValue = Number(newPrince.value);
     const newSelectValue = newSelect.value;
-
-
-
-
-    const benefArray = [];
-    benef.addEventListener("input", function() {
-
-        const benefVaue = benef.value;
-        const benefSplitet = benefVaue.split(";");
-        if (benefSplitet.length == 2) {
-            benefArray.push(benefSplitet[0]);
-            benefVaue = " ";
-            console.log("benefArray");
-        }
-    })
 
     if (newProductTitleValue.trim() && newSelectValue && (newPrinceValue > 0) && benefArray) {
         const productss = {
