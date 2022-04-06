@@ -86,28 +86,39 @@ for (let k = 0; k < manufacturers.length; k++) {
 
     newSelect.append(opton);
 }
+const renderproduc = function() {
+    productWrapper.innerHTML = "";
+
+    for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+        const newItem = cardRendr(product);
+        productWrapper.append(newItem);
+    }
+}
 
 const productWrapper = document.querySelector(".wrapper");
 
+productWrapper.addEventListener("click", function(evt) {
+    if (evt.target.matches(".btn-danger")) {
+        const clickedItemId = +evt.target.dataset.id;
+        const clickedItemIndex = products.findIndex(function(card) {
+            return card.id === clickedItemId;
+        });
+        console.log(clickedItemIndex);
+        products.splice(clickedItemIndex, 1);
 
+        renderproduc();
+
+    }
+
+});
 for (let i = 0; i < products.length; i++) {
     const product = products[i];
     const newItem = cardRendr(product);
     productWrapper.append(newItem);
 }
 
-productWrapper.addEventListener("click", function(evt) {
-    if (evt.target.matches(".btn-danger")) {
-        const clickedItemId = +evt.target.dataset.id;
-        const clickedItemIndex = products.findIndex(function(card) {
-            return card.id === clickedItemId
-        });
-        console.log(clickedItemIndex)
-        products.splice(clickedItemIndex, 1);
 
-    }
-
-});
 
 
 const benef = document.querySelector("#benefits");
