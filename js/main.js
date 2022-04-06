@@ -10,38 +10,39 @@ const createElement = function(elName, className, textContent) {
 }
 
 const cardRendr = function(card) {
+    const { id, title, img, price, model, addedDate, benefits } = card;
     const item = createElement("li", "col-4");
-    item.id = card.id;
+    item.id = id;
 
     const wrapper = createElement("div", "card")
 
     const productImg = createElement("img", "card-img-top");
-    productImg.src = card.img;
+    productImg.src = img;
 
 
     const cardText = createElement("div", "card-body");
 
 
-    const productTitle = createElement("h3", "card-title", card.title);
+    const productTitle = createElement("h3", "card-title", title);
 
-    const x = 3 * card.price / 4;
+    const x = 3 * price / 4;
 
     const productPrice = createElement("p", "card-text fw-bold");
     const productMark = createElement("mark", "", x);
     productPrice.append(productMark);
 
     const productPrice1 = createElement("p", "card-text");
-    const productPrice2 = createElement("s", "", card.price);
+    const productPrice2 = createElement("s", "", price);
     productPrice1.append(productPrice2);
 
-    const productModel = createElement("p", "badge bg-success", card.model);
+    const productModel = createElement("p", "badge bg-success", model);
 
-    const productDate = createElement("p", "card-text", card.addedDate);
+    const productDate = createElement("p", "card-text", addedDate);
 
     const benifitsList = createElement("ul", "d-flex flex-wrap list-unstyled");
 
-    for (let j = 0; j < card.benefits.length; j++) {
-        const benifits = card.benefits[j];
+    for (let j = 0; j < benefits.length; j++) {
+        const benifits = benefits[j];
 
         const benifitsItem = createElement("li", "badge bg-primary me-1 mb-1", benifits);
 
@@ -52,11 +53,15 @@ const cardRendr = function(card) {
 
     const button1 = createElement("button", "btn rounded-0 btn-secondary");
     const button1i = createElement("i", "fa-solid fa-pen");
+    button1i.style.pointerEvents = "none";
+
     button1.append(button1i);
     buttonDiv.append(button1);
 
     const button2 = createElement("button", "btn rounded-0 btn-danger");
     const button2i = createElement("i", "fa-solid fa-trash");
+    button2i.style.pointerEvents = "none";
+    button2.setAttribute("data-id", id);
     button2.append(button2i);
     buttonDiv.append(button2);
 
@@ -84,12 +89,25 @@ for (let k = 0; k < manufacturers.length; k++) {
 
 const productWrapper = document.querySelector(".wrapper");
 
+
 for (let i = 0; i < products.length; i++) {
     const product = products[i];
     const newItem = cardRendr(product);
     productWrapper.append(newItem);
 }
 
+productWrapper.addEventListener("click", function(evt) {
+    if (evt.target.matches(".btn-danger")) {
+        const clickedItemId = +evt.target.dataset.id;
+        const clickedItemIndex = products.findIndex(function(card) {
+            return card.id === clickedItemId
+        });
+        console.log(clickedItemIndex)
+        products.splice(clickedItemIndex, 1);
+
+    }
+
+});
 
 
 const benef = document.querySelector("#benefits");
@@ -112,8 +130,6 @@ benef.addEventListener("input", function() {
             benefItem.append(benefBtn);
         }
     }
-
-
 });
 
 const formF = document.querySelector("#form-body");
@@ -145,5 +161,4 @@ formF.addEventListener("submit", function(evt) {
         const newItem = cardRendr(productss);
         productWrapper.append(newItem);
     }
-
 });
