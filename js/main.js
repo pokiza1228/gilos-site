@@ -54,7 +54,9 @@ const cardRendr = function(card) {
     const button1 = createElement("button", "btn rounded-0 btn-secondary");
     const button1i = createElement("i", "fa-solid fa-pen");
     button1i.style.pointerEvents = "none";
-
+    button1.setAttribute("data-id", id);
+    button1.setAttribute("data-bs-toggle", "modal");
+    button1.setAttribute("data-bs-target", "#edit-product-modal");
     button1.append(button1i);
     buttonDiv.append(button1);
 
@@ -85,6 +87,7 @@ for (let k = 0; k < manufacturers.length; k++) {
     opton.id = manufacturers[k].id;
 
     newSelect.append(opton);
+
 }
 const renderproduc = function() {
     productWrapper.innerHTML = "";
@@ -98,20 +101,7 @@ const renderproduc = function() {
 
 const productWrapper = document.querySelector(".wrapper");
 
-productWrapper.addEventListener("click", function(evt) {
-    if (evt.target.matches(".btn-danger")) {
-        const clickedItemId = +evt.target.dataset.id;
-        const clickedItemIndex = products.findIndex(function(card) {
-            return card.id === clickedItemId;
-        });
-        console.log(clickedItemIndex);
-        products.splice(clickedItemIndex, 1);
 
-        renderproduc();
-
-    }
-
-});
 for (let i = 0; i < products.length; i++) {
     const product = products[i];
     const newItem = cardRendr(product);
@@ -122,7 +112,7 @@ for (let i = 0; i < products.length; i++) {
 
 
 const benef = document.querySelector("#benefits");
-const benefArray = [];
+let benefArray = [];
 benef.addEventListener("input", function() {
     const benefVaue = benef.value;
 
@@ -142,6 +132,7 @@ benef.addEventListener("input", function() {
         }
     }
 });
+
 
 const formF = document.querySelector("#form-body");
 formF.addEventListener("submit", function(evt) {
@@ -168,8 +159,76 @@ formF.addEventListener("submit", function(evt) {
         products.push(productss);
         formF.reset();
         const benefWrapper = document.querySelector(".benifits-wrapper");
-        benefWrapper.textContent = "";
+        benefWrapper.innerHTML = "";
         const newItem = cardRendr(productss);
         productWrapper.append(newItem);
+        benefArray = [];
+    }
+});
+
+const newProductTitle = document.querySelector("#product-title-edit");
+const newPrince = document.querySelector("#price-edit");
+
+productWrapper.addEventListener("click", function(evt) {
+    if (evt.target.matches(".btn-danger")) {
+        const clickedItemId = +evt.target.dataset.id;
+        const clickedItemIndex = products.findIndex(function(card) {
+            return card.id === clickedItemId;
+        });
+        console.log(clickedItemIndex);
+        products.splice(clickedItemIndex, 1);
+
+        renderproduc();
+    } else if (evt.target.matches(".btn-secondary")) {
+        const clickedId = +evt.target.dataset.id;
+        const clicked = products.find(function(card) {
+            return card.id === clickedId;
+        });
+        console.log(clicked);
+        newProductTitle.value = clicked.title;
+        newPrince.value = clicked.price;
+        newSelect.value = clicked.model;
+
+        editForm.setAttribute("data-editingid", clicked.id);
+    }
+
+});
+
+const editForm = document.querySelector("#form-body-edit")
+editForm.addEventListener("submit", function(evt) {
+    evt.preventDefault();
+
+    const editingId = +evt.target.dataset.editingid;
+
+
+
+    const newProductTitleValue = newProductTitle.value;
+    const newPrinceValue = Number(newPrince.value);
+    const newSelectValue = newSelect.value;
+
+    if (newProductTitleValue.trim() && newSelectValue && (newPrinceValue > 0) && benefArray) {
+        const productss = {
+            id: editingId,
+            title: newProductTitleValue,
+            img: "https://picsum.photos/300/200",
+            price: newPrinceValue,
+            model: newSelectValue,
+            addedDate: new Date().toISOString(),
+            benefits: benefArray
+        }
+
+
+
+        const editingItemIndex = products.findIndex(function(product) {
+            return product.id === editingId
+        })
+
+        console.log(editingItemIndex)
+        products.splice(editingItemIndex, 1, productss);
+
+        formF.reset();
+        const benefWrapper = document.querySelector(".benifits-wrapper");
+        benefWrapper.innerHTML = "";
+        renderproduc();
     }
 });
