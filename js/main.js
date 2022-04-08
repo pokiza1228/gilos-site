@@ -1,3 +1,4 @@
+//element yashash funksiyasi 
 const createElement = function(elName, className, textContent) {
     const createdElement = document.createElement(elName);
     createdElement.className = className;
@@ -9,7 +10,9 @@ const createElement = function(elName, className, textContent) {
     return createdElement
 }
 
+//item yasash funksiyasi
 const cardRendr = function(card) {
+    //tesktruzatsiya
     const { id, title, img, price, model, addedDate, benefits } = card;
     const item = createElement("li", "col-4");
     item.id = id;
