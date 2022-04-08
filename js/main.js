@@ -81,14 +81,7 @@ const cardRendr = function(card) {
     return item
 }
 
-const newSelect = document.querySelector("#product-manufacturers");
-for (let k = 0; k < manufacturers.length; k++) {
-    const opton = createElement("option", "", manufacturers[k].name);
-    opton.id = manufacturers[k].id;
-
-    newSelect.append(opton);
-
-}
+//productni chiqarish funksiyasi
 const renderproduc = function() {
     productWrapper.innerHTML = "";
 
@@ -99,18 +92,24 @@ const renderproduc = function() {
     }
 }
 
+//productni chiqarish
 const productWrapper = document.querySelector(".wrapper");
-
-
 for (let i = 0; i < products.length; i++) {
     const product = products[i];
     const newItem = cardRendr(product);
     productWrapper.append(newItem);
 }
 
+//add manufactior
+const newSelect = document.querySelector("#product-manufacturers");
+for (let k = 0; k < manufacturers.length; k++) {
+    const opton = createElement("option", "", manufacturers[k].name);
+    opton.id = manufacturers[k].id;
 
+    newSelect.append(opton);
+}
 
-
+//add benifits
 const benef = document.querySelector("#benefits");
 let benefArray = [];
 benef.addEventListener("input", function() {
@@ -133,7 +132,7 @@ benef.addEventListener("input", function() {
     }
 });
 
-
+//add
 const formF = document.querySelector("#form-body");
 formF.addEventListener("submit", function(evt) {
     evt.preventDefault();
@@ -166,10 +165,12 @@ formF.addEventListener("submit", function(evt) {
     }
 });
 
+//edit delet codes
 const newProductTitle = document.querySelector("#product-title-edit");
 const newPrince = document.querySelector("#price-edit");
 
 productWrapper.addEventListener("click", function(evt) {
+    //delet
     if (evt.target.matches(".btn-danger")) {
         const clickedItemId = +evt.target.dataset.id;
         const clickedItemIndex = products.findIndex(function(card) {
@@ -179,7 +180,9 @@ productWrapper.addEventListener("click", function(evt) {
         products.splice(clickedItemIndex, 1);
 
         renderproduc();
-    } else if (evt.target.matches(".btn-secondary")) {
+    }
+    //edit
+    else if (evt.target.matches(".btn-secondary")) {
         const clickedId = +evt.target.dataset.id;
         const clicked = products.find(function(card) {
             return card.id === clickedId;
@@ -194,13 +197,47 @@ productWrapper.addEventListener("click", function(evt) {
 
 });
 
+
+
+//edit benifits
+const benefEdit = document.querySelector("#benefits-edit");
+let benefArrayEdit = [];
+benefEdit.addEventListener("input", function() {
+    const benefVaue = benefEdit.value;
+
+    const benefSplitet = benefVaue.split(";");
+
+    if (benefSplitet.length == 2) {
+        benefArray.push(benefSplitet[0]);
+
+        benefEdit.value = "";
+        const benefWrapper = document.querySelector(".benifits-wrapper-edit");
+        benefWrapper.textContent = "";
+        for (let a = 0; a < benefArray.length; a++) {
+            const benefItem = createElement("li", "me-1 mb-1");
+            const benefBtn = createElement("button", "btn btn-sm badge rounded-pill btn-danger", benefArray[a]);
+            benefWrapper.append(benefItem);
+            benefItem.append(benefBtn);
+        }
+    }
+});
+
+// edit manufactior
+const newSelectEdit = document.querySelector(".edit-select");
+for (let k = 0; k < manufacturers.length; k++) {
+    const opton = createElement("option", "", manufacturers[k].name);
+    opton.id = manufacturers[k].id;
+
+    newSelectEdit.append(opton);
+
+}
+
+//edit form
 const editForm = document.querySelector("#form-body-edit")
 editForm.addEventListener("submit", function(evt) {
     evt.preventDefault();
 
     const editingId = +evt.target.dataset.editingid;
-
-
 
     const newProductTitleValue = newProductTitle.value;
     const newPrinceValue = Number(newPrince.value);
