@@ -85,11 +85,11 @@ const cardRendr = function(card) {
 }
 
 //productni chiqarish funksiyasi
-const renderproduc = function() {
+const renderproduc = function(productArray = products) {
     productWrapper.innerHTML = "";
 
-    for (let i = 0; i < products.length; i++) {
-        const product = products[i];
+    for (let i = 0; i < productArray.length; i++) {
+        const product = productArray[i];
         const newItem = cardRendr(product);
         productWrapper.append(newItem);
     }
@@ -104,12 +104,14 @@ for (let i = 0; i < products.length; i++) {
 }
 
 //add manufactior
+const formManufactor = document.querySelector("#manufacturer");
 const newSelect = document.querySelector("#product-manufacturers");
 for (let k = 0; k < manufacturers.length; k++) {
     const opton = createElement("option", "", manufacturers[k].name);
     opton.id = manufacturers[k].id;
 
     newSelect.append(opton);
+    formManufactor.append(opton);
 }
 
 //add benifits
@@ -272,3 +274,26 @@ editForm.addEventListener("submit", function(evt) {
         renderproduc();
     }
 });
+
+
+//filter
+const filterForm = document.querySelector(".form-filter");
+filterForm.addEventListener("submit", function(evt) {
+    evt.preventDefault;
+
+    const elements = evt.target.elements;
+
+    const priceToValue = Number(elements.to.value);
+    const priceMarkValue = Number(elements.from.value);
+    const manufactorValue = formManufactor.value;
+    const filterProducts = products.filter(function(product) {
+        return product.price * 3 / 4 <= priceToValue;
+    }).filter(function(product) {
+        return product.price * 3 / 4 >= priceMarkValue;
+    }).filter(function(product) {
+        return product.model == manufactorValue;
+    })
+    console.log(filterProducts);
+    renderproduc(filterProducts);
+
+})
