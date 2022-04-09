@@ -291,7 +291,7 @@ filterForm.addEventListener("submit", function(evt) {
     }).filter(function(product) {
         return product.price * 3 / 4 >= priceMarkValue;
     }).filter(function(product) {
-        return product.model == manufactorValue;
+        return product.model == manufactorValue || "All";
     })
     console.log(filterProducts);
     renderproduc(filterProducts);
