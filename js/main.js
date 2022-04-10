@@ -286,12 +286,13 @@ filterForm.addEventListener("submit", function(evt) {
     const priceToValue = Number(elements.to.value);
     const priceMarkValue = Number(elements.from.value);
     const manufactorValue = formManufactor.value;
+    const seatrch = elements.search.value;
+
     const filterProducts = products.filter(function(product) {
-        return product.price * 3 / 4 <= priceToValue;
-    }).filter(function(product) {
-        return product.price * 3 / 4 >= priceMarkValue;
-    }).filter(function(product) {
-        return product.model == manufactorValue || "All";
+        return (!priceToValue ? true : product.price * 3 / 4 <= priceToValue) &&
+            (product.price * 3 / 4 >= priceMarkValue) &&
+            (product.model == manufactorValue || "All") &&
+            (product.title.toLowerCase().includes(seatrch.toLowerCase()));
     })
     console.log(filterProducts);
     renderproduc(filterProducts);
