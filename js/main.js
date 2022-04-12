@@ -292,7 +292,7 @@ filterForm.addEventListener("submit", function(evt) {
         return (!priceToValue ? true : product.price * 3 / 4 <= priceToValue) &&
             (product.price * 3 / 4 >= priceMarkValue) &&
             (product.model == manufactorValue || "All") &&
-            (product.title.toLowerCase().includes(seatrch.toLowerCase()));
+            (!seatrch ? true : product.title.toLowerCase().includes(seatrch.toLowerCase()));
     })
     console.log(filterProducts);
     renderproduc(filterProducts);
