@@ -156,8 +156,8 @@ benef.addEventListener("input", function() {
 });
 
 //add
-const formF = document.querySelector("#form-body");
-formF.addEventListener("submit", function(evt) {
+const addForm = document.querySelector("#form-body");
+addForm.addEventListener("submit", function(evt) {
     evt.preventDefault();
 
     const newProductTitle = document.querySelector("#product-title");
@@ -179,11 +179,13 @@ formF.addEventListener("submit", function(evt) {
             benefits: benefArray
         }
         products.push(productss);
-        formF.reset();
-        const benefWrapper = document.querySelector(".benifits-wrapper");
-        benefWrapper.innerHTML = "";
+        addForm.reset();
+        localStorage.setItem("products", JSON.stringify(products));
         const newItem = cardRendr(productss);
         productWrapper.append(newItem);
+
+        const benefWrapper = document.querySelector(".benifits-wrapper");
+        benefWrapper.innerHTML = "";
         benefArray = [];
     }
 });
@@ -216,8 +218,6 @@ productWrapper.addEventListener("click", function(evt) {
         newSelect.value = clicked.model;
 
         editForm.setAttribute("data-editingid", clicked.id);
-        renderproduc();
-
     }
 
 });
@@ -291,6 +291,7 @@ editForm.addEventListener("submit", function(evt) {
     benefWrapper.innerHTML = "";
     editForm.reset();
     renderproduc();
+    localStorage.setItem("products", JSON.stringify(products));
 });
 
 
