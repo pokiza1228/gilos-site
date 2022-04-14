@@ -203,7 +203,7 @@ productWrapper.addEventListener("click", function(evt) {
         });
         console.log(clickedItemIndex);
         products.splice(clickedItemIndex, 1);
-
+        localStorage.setItem("products", JSON.stringify(products));
         renderproduc();
     }
     //edit
