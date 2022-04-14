@@ -165,7 +165,34 @@
     </div>
 
 
-
+    <template id="item-tempel">
+        <li class="col-4">
+            <div class="card">
+                <img class="card-img-top item-img" src="">
+                <div class="card-body">
+                    <h3 class="card-title item-title"></h3>
+                    <p class="card-text fw-bold"><mark class="item-mark"></mark></p>
+                    <p class="card-text"><s class="item-mark-s"></s></p>
+                    <p class="badge bg-success item-model"></p>
+                    <p class="card-text item-date"></p>
+                    <ul class="d-flex flex-wrap list-unstyled benifits-list">
+                        <!--
+                        <li class="badge bg-primary me-1 mb-1">8gb</li>
+                        <li class="badge bg-primary me-1 mb-1">128gb</li>
+                        <li class="badge bg-primary me-1 mb-1">Waterproof</li> -->
+                    </ul>
+                    <div class="position-absolute top-0 end-0 d-flex">
+                        <button class="btn rounded-0 btn-secondary btn-edit" data-bs-toggle="modal" data-bs-target="#edit-product-modal">
+                            <i class="fa-solid fa-pen" style="pointer-events: none;"></i>
+                        </button>
+                        <button class="btn rounded-0 btn-danger btn-delet">
+                            <i class="fa-solid fa-trash" style="pointer-events: none;"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </template>
 
 
     <script src="js/bootstrap.bundle.min.js"></script>
@@ -173,6 +200,10 @@
 
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
+
+
+
+
 </body>
 
 </html>

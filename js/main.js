@@ -11,39 +11,20 @@ const createElement = function(elName, className, textContent) {
 }
 
 //item yasash funksiyasi
+const productTemple = document.querySelector("#item-tempel")
 const cardRendr = function(card) {
     //tesktruzatsiya
     const { id, title, img, price, model, addedDate, benefits } = card;
-    const item = createElement("li", "col-4");
-    item.id = id;
 
-    const wrapper = createElement("div", "card")
-
-    const productImg = createElement("img", "card-img-top");
-    productImg.src = img;
-
-
-    const cardText = createElement("div", "card-body");
-
-
-    const productTitle = createElement("h3", "card-title", title);
-
+    const item = productTemple.content.cloneNode(true);
+    item.querySelector(".item-img").src = img;
+    item.querySelector(".item-title").textContent = title;
     const x = 3 * price / 4;
-
-    const productPrice = createElement("p", "card-text fw-bold");
-    const productMark = createElement("mark", "", x);
-    productPrice.append(productMark);
-
-    const productPrice1 = createElement("p", "card-text");
-    const productPrice2 = createElement("s", "", price);
-    productPrice1.append(productPrice2);
-
-    const productModel = createElement("p", "badge bg-success", model);
-
-    const productDate = createElement("p", "card-text", addedDate);
-
-    const benifitsList = createElement("ul", "d-flex flex-wrap list-unstyled");
-
+    item.querySelector(".item-mark").textContent = x;
+    item.querySelector(".item-mark-s").textContent = price;
+    item.querySelector(".item-model").textContent = model;
+    item.querySelector(".item-date").textContent = addedDate;
+    const benifitsList = item.querySelector(".benifits-list");
     for (let j = 0; j < benefits.length; j++) {
         const benifits = benefits[j];
 
@@ -51,35 +32,67 @@ const cardRendr = function(card) {
 
         benifitsList.append(benifitsItem);
     }
+    item.querySelector(".btn-edit").setAttribute("data-id", id);
+    item.querySelector(".btn-delet").setAttribute("data-id", id);
 
-    const buttonDiv = createElement("div", "position-absolute top-0 end-0 d-flex");
+    // const item = createElement("li", "col-4");
+    // item.id = id;
 
-    const button1 = createElement("button", "btn rounded-0 btn-secondary");
-    const button1i = createElement("i", "fa-solid fa-pen");
-    button1i.style.pointerEvents = "none";
-    button1.setAttribute("data-id", id);
-    button1.setAttribute("data-bs-toggle", "modal");
-    button1.setAttribute("data-bs-target", "#edit-product-modal");
-    button1.append(button1i);
-    buttonDiv.append(button1);
+    // const wrapper = createElement("div", "card")
 
-    const button2 = createElement("button", "btn rounded-0 btn-danger");
-    const button2i = createElement("i", "fa-solid fa-trash");
-    button2i.style.pointerEvents = "none";
-    button2.setAttribute("data-id", id);
-    button2.append(button2i);
-    buttonDiv.append(button2);
+    // const productImg = createElement("img", "card-img-top");
+    // productImg.src = img;
 
-    item.append(wrapper);
-    wrapper.append(productImg);
-    wrapper.append(cardText);
-    cardText.append(productTitle);
-    cardText.append(productPrice);
-    cardText.append(productPrice1);
-    cardText.append(productModel);
-    cardText.append(productDate);
-    cardText.append(benifitsList);
-    cardText.append(buttonDiv);
+    // const cardText = createElement("div", "card-body");
+
+    // const productTitle = createElement("h3", "card-title", title);
+
+    // 
+
+    // const productPrice = createElement("p", "card-text fw-bold");
+    // const productMark = createElement("mark", "", x);
+    // productPrice.append(productMark);
+
+    // const productPrice1 = createElement("p", "card-text");
+    // const productPrice2 = createElement("s", "", price);
+    // productPrice1.append(productPrice2);
+
+    // const productModel = createElement("p", "badge bg-success", model);
+
+    // const productDate = createElement("p", "card-text", addedDate);
+
+    // const benifitsList = createElement("ul", "d-flex flex-wrap list-unstyled");
+
+
+
+    // const buttonDiv = createElement("div", "position-absolute top-0 end-0 d-flex");
+
+    // const button1 = createElement("button", "btn rounded-0 btn-secondary");
+    // const button1i = createElement("i", "fa-solid fa-pen");
+    // button1i.style.pointerEvents = "none";
+    // button1.setAttribute("data-id", id);
+    // button1.setAttribute("data-bs-toggle", "modal");
+    // button1.setAttribute("data-bs-target", "#edit-product-modal");
+    // button1.append(button1i);
+    // buttonDiv.append(button1);
+
+    // const button2 = createElement("button", "btn rounded-0 btn-danger");
+    // const button2i = createElement("i", "fa-solid fa-trash");
+    // button2i.style.pointerEvents = "none";
+    // button2.setAttribute("data-id", id);
+    // button2.append(button2i);
+    // buttonDiv.append(button2);
+
+    // item.append(wrapper);
+    // wrapper.append(productImg);
+    // wrapper.append(cardText);
+    // cardText.append(productTitle);
+    // cardText.append(productPrice);
+    // cardText.append(productPrice1);
+    // cardText.append(productModel);
+    // cardText.append(productDate);
+    // cardText.append(benifitsList);
+    // cardText.append(buttonDiv);
 
     return item
 }
@@ -111,10 +124,15 @@ for (let k = 0; k < manufacturers.length; k++) {
     opton.id = manufacturers[k].id;
 
     newSelect.append(opton);
+}
+for (let k = 0; k < manufacturers.length; k++) {
+    const opton = createElement("option", "", manufacturers[k].name);
+    opton.id = manufacturers[k].id;
+
     formManufactor.append(opton);
 }
 
-//add benifits
+// add benifits
 const benef = document.querySelector("#benefits");
 let benefArray = [];
 benef.addEventListener("input", function() {
@@ -144,7 +162,7 @@ formF.addEventListener("submit", function(evt) {
 
     const newProductTitle = document.querySelector("#product-title");
     const newPrince = document.querySelector("#price");
-    const newSelect = document.querySelector("#product-manufacturers");
+
 
     const newProductTitleValue = newProductTitle.value;
     const newPrinceValue = Number(newPrince.value);
@@ -198,6 +216,8 @@ productWrapper.addEventListener("click", function(evt) {
         newSelect.value = clicked.model;
 
         editForm.setAttribute("data-editingid", clicked.id);
+        renderproduc();
+
     }
 
 });
@@ -259,8 +279,6 @@ editForm.addEventListener("submit", function(evt) {
             benefits: benefArray
         }
 
-
-
         const editingItemIndex = products.findIndex(function(product) {
             return product.id === editingId
         })
@@ -268,11 +286,11 @@ editForm.addEventListener("submit", function(evt) {
         console.log(editingItemIndex)
         products.splice(editingItemIndex, 1, productss);
 
-        formF.reset();
-        const benefWrapper = document.querySelector(".benifits-wrapper");
-        benefWrapper.innerHTML = "";
-        renderproduc();
     }
+    const benefWrapper = document.querySelector(".benifits-wrapper");
+    benefWrapper.innerHTML = "";
+    editForm.reset();
+    renderproduc();
 });
 
 
@@ -287,14 +305,35 @@ filterForm.addEventListener("submit", function(evt) {
     const priceMarkValue = Number(elements.from.value);
     const manufactorValue = formManufactor.value;
     const seatrch = elements.search.value;
+    const sort = elements.sortby.value;
 
-    const filterProducts = products.filter(function(product) {
-        return (!priceToValue ? true : product.price * 3 / 4 <= priceToValue) &&
-            (product.price * 3 / 4 >= priceMarkValue) &&
-            (product.model == manufactorValue || "All") &&
-            (!seatrch ? true : product.title.toLowerCase().includes(seatrch.toLowerCase()));
-    })
+    const filterProducts = products
+        .sort(function(a, b) {
+            switch (sort) {
+                case "1":
+                    if (a.title.toLowerCase > b.title.toLowerCase) {
+                        return 1
+                    } else if (a.title.toLowerCase < b.title.toLowerCase) {
+                        return -1
+                    } else {
+                        return 0
+                    }
+                case "2":
+                    return b.price - a.price;
+                case "3":
+                    return a.price - b.price;
+                default:
+                    break;
+            }
+
+        })
+        .filter(function(product) {
+            return (!priceToValue ? true : product.price * 3 / 4 <= priceToValue) &&
+                (product.price * 3 / 4 >= priceMarkValue) &&
+                (product.model == manufactorValue || "All") &&
+                (!seatrch ? true : product.title.toLowerCase().includes(seatrch.toLowerCase()));
+        })
     console.log(filterProducts);
     renderproduc(filterProducts);
-
+    filterForm.reset();
 })
