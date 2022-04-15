@@ -1,16 +1,15 @@
-//element yashash funksiyasi 
+//element yashash funksiyasi
 const createElement = function(elName, className, textContent) {
-    const createdElement = document.createElement(elName);
-    createdElement.className = className;
+        const createdElement = document.createElement(elName);
+        createdElement.className = className;
 
-    if (textContent) {
-        createdElement.textContent = textContent;
+        if (textContent) {
+            createdElement.textContent = textContent;
+        }
+
+        return createdElement
     }
-
-    return createdElement
-}
-
-//item yasash funksiyasi
+    //item yasash funksiyasi
 const productTemple = document.querySelector("#item-tempel")
 const cardRendr = function(card) {
     //tesktruzatsiya
@@ -37,36 +36,21 @@ const cardRendr = function(card) {
 
     // const item = createElement("li", "col-4");
     // item.id = id;
-
     // const wrapper = createElement("div", "card")
-
     // const productImg = createElement("img", "card-img-top");
     // productImg.src = img;
-
     // const cardText = createElement("div", "card-body");
-
     // const productTitle = createElement("h3", "card-title", title);
-
-    // 
-
     // const productPrice = createElement("p", "card-text fw-bold");
     // const productMark = createElement("mark", "", x);
     // productPrice.append(productMark);
-
     // const productPrice1 = createElement("p", "card-text");
     // const productPrice2 = createElement("s", "", price);
     // productPrice1.append(productPrice2);
-
     // const productModel = createElement("p", "badge bg-success", model);
-
     // const productDate = createElement("p", "card-text", addedDate);
-
     // const benifitsList = createElement("ul", "d-flex flex-wrap list-unstyled");
-
-
-
     // const buttonDiv = createElement("div", "position-absolute top-0 end-0 d-flex");
-
     // const button1 = createElement("button", "btn rounded-0 btn-secondary");
     // const button1i = createElement("i", "fa-solid fa-pen");
     // button1i.style.pointerEvents = "none";
@@ -75,14 +59,12 @@ const cardRendr = function(card) {
     // button1.setAttribute("data-bs-target", "#edit-product-modal");
     // button1.append(button1i);
     // buttonDiv.append(button1);
-
     // const button2 = createElement("button", "btn rounded-0 btn-danger");
     // const button2i = createElement("i", "fa-solid fa-trash");
     // button2i.style.pointerEvents = "none";
     // button2.setAttribute("data-id", id);
     // button2.append(button2i);
     // buttonDiv.append(button2);
-
     // item.append(wrapper);
     // wrapper.append(productImg);
     // wrapper.append(cardText);
@@ -117,7 +99,6 @@ for (let i = 0; i < products.length; i++) {
 }
 
 //add manufactior
-const formManufactor = document.querySelector("#manufacturer");
 const newSelect = document.querySelector("#product-manufacturers");
 for (let k = 0; k < manufacturers.length; k++) {
     const opton = createElement("option", "", manufacturers[k].name);
@@ -125,6 +106,7 @@ for (let k = 0; k < manufacturers.length; k++) {
 
     newSelect.append(opton);
 }
+const formManufactor = document.querySelector("#manufacturer");
 for (let k = 0; k < manufacturers.length; k++) {
     const opton = createElement("option", "", manufacturers[k].name);
     opton.id = manufacturers[k].id;
@@ -162,7 +144,6 @@ addForm.addEventListener("submit", function(evt) {
 
     const newProductTitle = document.querySelector("#product-title");
     const newPrince = document.querySelector("#price");
-
 
     const newProductTitleValue = newProductTitle.value;
     const newPrinceValue = Number(newPrince.value);
@@ -222,41 +203,6 @@ productWrapper.addEventListener("click", function(evt) {
 
 });
 
-
-
-//edit benifits
-const benefEdit = document.querySelector("#benefits-edit");
-let benefArrayEdit = [];
-benefEdit.addEventListener("input", function() {
-    const benefVaue = benefEdit.value;
-
-    const benefSplitet = benefVaue.split(";");
-
-    if (benefSplitet.length == 2) {
-        benefArray.push(benefSplitet[0]);
-
-        benefEdit.value = "";
-        const benefWrapper = document.querySelector(".benifits-wrapper-edit");
-        benefWrapper.textContent = "";
-        for (let a = 0; a < benefArray.length; a++) {
-            const benefItem = createElement("li", "me-1 mb-1");
-            const benefBtn = createElement("button", "btn btn-sm badge rounded-pill btn-danger", benefArray[a]);
-            benefWrapper.append(benefItem);
-            benefItem.append(benefBtn);
-        }
-    }
-});
-
-// edit manufactior
-const newSelectEdit = document.querySelector(".edit-select");
-for (let k = 0; k < manufacturers.length; k++) {
-    const opton = createElement("option", "", manufacturers[k].name);
-    opton.id = manufacturers[k].id;
-
-    newSelectEdit.append(opton);
-
-}
-
 //edit form
 const editForm = document.querySelector("#form-body-edit")
 editForm.addEventListener("submit", function(evt) {
@@ -294,6 +240,37 @@ editForm.addEventListener("submit", function(evt) {
     localStorage.setItem("products", JSON.stringify(products));
 });
 
+// edit manufactior
+const newSelectEdit = document.querySelector(".edit-select");
+for (let k = 0; k < manufacturers.length; k++) {
+    const opton = createElement("option", "", manufacturers[k].name);
+    opton.id = manufacturers[k].id;
+
+    newSelectEdit.append(opton);
+}
+
+//edit benifits
+const benefEdit = document.querySelector("#benefits-edit");
+let benefArrayEdit = [];
+benefEdit.addEventListener("input", function() {
+    const benefVaue = benefEdit.value;
+
+    const benefSplitet = benefVaue.split(";");
+
+    if (benefSplitet.length == 2) {
+        benefArray.push(benefSplitet[0]);
+
+        benefEdit.value = "";
+        const benefWrapper = document.querySelector(".benifits-wrapper-edit");
+        benefWrapper.textContent = "";
+        for (let a = 0; a < benefArray.length; a++) {
+            const benefItem = createElement("li", "me-1 mb-1");
+            const benefBtn = createElement("button", "btn btn-sm badge rounded-pill btn-danger", benefArray[a]);
+            benefWrapper.append(benefItem);
+            benefItem.append(benefBtn);
+        }
+    }
+});
 
 //filter
 const filterForm = document.querySelector(".form-filter");
@@ -312,9 +289,9 @@ filterForm.addEventListener("submit", function(evt) {
         .sort(function(a, b) {
             switch (sort) {
                 case "1":
-                    if (a.title.toLowerCase > b.title.toLowerCase) {
+                    if (a.title.toLowerCase() > b.title.toLowerCase()) {
                         return 1
-                    } else if (a.title.toLowerCase < b.title.toLowerCase) {
+                    } else if (a.title.toLowerCase() < b.title.toLowerCase()) {
                         return -1
                     } else {
                         return 0
